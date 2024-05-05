@@ -1,0 +1,348 @@
+.homeContainer {
+    display: flex;
+  
+    height: 100vh;
+  }
+  
+  .leftSidebar {
+    border: 1px solid gray;
+    width: 7%;
+    border-radius: 5px;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+  
+    > img {
+      height: 3.5rem;
+      width: 3.5rem;
+      margin: 1.5rem 1rem;
+    }
+  }
+  
+  .logoContent {
+    > h4 {
+      margin-inline: 1rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .ReferLogoContent {
+    > h4 {
+      margin-inline: 1rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .MiddleContent {
+    height: 200vh;
+    width: 86vw;
+  
+    margin: auto;
+    padding: 3rem 2rem;
+  }
+  
+  .RightSidebar {
+    background-color: rgb(187, 252, 234);
+    width: 7%;
+    position: fixed;
+    height: 100vh;
+    right: 0;
+  }
+  
+  .material-symbols-outlined {
+    margin: 0.5rem 2rem;
+  }
+  
+  .RightContent {
+    > img {
+      width: 4rem;
+      height: 3.5rem;
+      margin: 1.5rem 1rem;
+      border-radius: 6rem;
+      object-fit: cover;
+    }
+  
+    border-bottom: 3px solid gray;
+  }
+  
+  .EditLogo {
+    > span {
+      color: gray;
+      font-size: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    > h3 {
+      margin-left: 0.6rem;
+      font-family: "Roboto", sans-serif;
+      font-size: 1rem;
+      color: gray;
+      font-weight: 800;
+    }
+  }
+  
+  .filters {
+    display: flex;
+  }
+  
+  .filter {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-inline: 0.2rem;
+  }
+  
+  .filter input,
+  .filter select {
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  
+  .filter input::placeholder,
+  .filter select {
+    font-size: 0.8rem;
+  
+    font-family: "Poppins", sans-serif;
+    color: gray;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+  
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  
+    padding: 1rem;
+    height: 33rem;
+    width: 24rem;
+  
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .card-header {
+    border: 1px solid gray;
+    border-radius: 25px;
+    width: 10rem;
+    text-align: center;
+    padding: 0.3rem 0.3rem;
+    margin: 0.5rem 0.1rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.6rem;
+    font-weight: 500;
+  }
+  
+  .company-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .job-details {
+    display: flex;
+    align-items: center;
+  }
+  
+  .jobContent {
+    > h2 {
+      font-family: "Poppins", sans-serif;
+      font-size: 1rem;
+      color: gray;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+  
+    > h3 {
+      font-family: "Roboto", sans-serif;
+      font-size: 1rem;
+  
+      font-weight: 400;
+      margin-top: 0.3rem;
+    }
+    > h4 {
+      font-family: "Roboto", sans-serif;
+      font-size: 0.8rem;
+  
+      font-weight: 400;
+      margin-top: 0.3rem;
+    }
+  
+    > p {
+      font-family: "Roboto", sans-serif;
+      font-size: 1rem;
+  
+      font-weight: 400;
+      margin-top: 0.3rem;
+      margin-right: 1rem;
+      color: grey;
+    }
+  }
+  
+  .card-body {
+    margin-top: 1rem;
+    position: relative;
+    max-height: 240px;
+    overflow: hidden;
+  
+    > h1 {
+      font-family: "Roboto", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgb(52, 50, 50);
+    }
+  
+    > p {
+      margin-top: 0.4rem;
+      font-family: "Poppins", sans-serif;
+      font-size: 0.8rem;
+    }
+  }
+  
+  .card-body::after {
+    content: "";
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, white);
+  }
+  
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+  
+    > h3 {
+      margin-top: 1rem;
+      font-family: "Roboto", sans-serif;
+      font-size: 1rem;
+      color: gray;
+      font-weight: 400;
+    }
+    > h2 {
+      font-family: "Roboto", sans-serif;
+      font-size: 0.9rem;
+      color: black;
+      margin-top: 0.2rem;
+      font-weight: 400;
+    }
+  
+    > button {
+      background-color: rgb(85, 239, 196);
+      color: white;
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+  
+      font-family: "Poppins", sans-serif;
+      font-size: 1rem;
+      color: black;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+  }
+  
+  .truncated {
+    max-height: 250px;
+    overflow: hidden;
+  }
+  
+  .truncated::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Height of the fade effect */
+    background: linear-gradient(to bottom, transparent, white 90%);
+  }
+  
+  .show-more-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    background: white; /* This should match the card background */
+    text-align: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: blue;
+  }
+  
+  .no-jobs-container {
+    text-align: center;
+    margin: 3rem 3rem;
+  
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+  }
+  
+  .no-jobs-container h2 {
+    font-size: 1.5rem;
+    color: #666;
+  }
+  
+  .no-jobs-container p {
+    font-size: 1rem;
+    color: #888;
+  }
+  
+  /* Media Queries for Responsive Design */
+  
+  @media screen and (max-width: 900px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .leftSidebar,
+    .RightSidebar {
+      width: 15%;
+    }
+  
+    .MiddleContent {
+      width: 70%; /* Adjusted width for better responsiveness */
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    .grid-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  
+    .leftSidebar,
+    .RightSidebar {
+      display: none;
+    }
+  
+    .MiddleContent {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .card {
+      width: 90%;
+    }
+  }
