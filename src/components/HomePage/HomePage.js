@@ -86,9 +86,12 @@ const HomePage = () => {
           job.companyName
             .toLowerCase()
             .includes(companyNameFilter.toLowerCase()));
+      const searchMatch =
+        !filters.search ||
+          (job.companyName && job.companyName.toLowerCase().includes(filters.search.toLowerCase()));
 
       return (
-        roleMatch && expMatch && remoteMatch && salaryMatch && companyMatch
+        roleMatch && expMatch && remoteMatch && salaryMatch && companyMatch && searchMatch
       );
     });
     setFilteredJobs(filtered);
@@ -194,8 +197,8 @@ const HomePage = () => {
               <input
                 type="text"
                 placeholder="Search Company Name"
-                name="companyName"
-                value={companyNameFilter}
+                name="search"
+                value={filters.search}
                 onChange={handleFilterChange}
               />
             </div>
@@ -244,7 +247,7 @@ const HomePage = () => {
                     <h2>
                       {job.minExp || 0} - {job.maxExp || 0} years
                     </h2>
-                    <button ><a href={job.jdLink} target="_blank">Easy Apply </a></button>
+                    <button ><a href={job.jdLink} target="blank">Easy Apply </a></button>
                   </div>
                 </div>
               ))
