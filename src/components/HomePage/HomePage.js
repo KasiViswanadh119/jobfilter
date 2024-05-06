@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +34,7 @@ const HomePage = () => {
     applyFilters();
   }, [jobs, filters, companyNameFilter]); // React to filter changes
 
-  const fetchJobs = async () => {
+  const fetchJobs = useCallback(async () => {
     if (loading) return;
     setLoading(true);
 
@@ -60,7 +60,7 @@ const HomePage = () => {
       console.error("Error fetching jobs:", error);
       setLoading(false);
     }
-  };
+  }, [loading, offset]);
 
   const applyFilters = () => {
     const filtered = jobs.filter((job) => {
@@ -106,6 +106,14 @@ const HomePage = () => {
     }
   };
 
+  const handleRemoveFilter = (filterName) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: "", // Reset the filter value to default
+    }));
+  };
+  
+
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
@@ -119,51 +127,25 @@ const HomePage = () => {
   return (
     <>
       <div className="homeContainer">
-        <div className="leftSidebar">
-          <img src="./logo.png" alt="" />
-          <div className="logoContent">
-            <h4>Get jobs</h4>
-            <div className="logos">
-              <span class="material-symbols-outlined">person</span>
-            </div>
-            <div className="logos">
-              <span class="material-symbols-outlined">search</span>
-            </div>
-            <div className="logos">
-              <span class="material-symbols-outlined">Indian_rupee</span>
-            </div>
-            <div className="logos">
-              <span class="material-symbols-outlined">person_add</span>
-            </div>
-          </div>
-          <div className="ReferLogoContent">
-            <h4>REFER</h4>
-            <div className="ReferLogo">
-              <span class="material-symbols-outlined">recommend</span>
-            </div>
-            <div className="ReferLogo">
-              <span class="material-symbols-outlined">featured_play_list</span>
-            </div>
-            <div className="ReferLogo">
-              <span class="material-symbols-outlined">share</span>
-            </div>
-          </div>
-        </div>
+        
 
         <div className="MiddleContent">
           <div className="filters">
             <div className="filter">
-              <select name="role" onChange={handleFilterChange}>
-                <option>Roles</option>
-                <option>Backend</option>
-                <option>Frontend</option>
-                <option>Fullstack</option>
-                <option> Flutter</option>
-                <option>Android</option>
-                <option>Hr</option>
-                <option> Legal</option>
-                <option>Finance</option>
+              <select name="role" value={filters.role} onChange={handleFilterChange}>
+                <option value="">Roles</option>
+                <option value="Backend">Backend</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Fullstack">Fullstack</option>
+                <option value="Flutter">Flutter</option>
+                <option value="Android">Android</option>
+                <option value="Hr">Hr</option>
+                <option value="Legal">Legal</option>
+                <option value="Finance">Finance</option>
               </select>
+              {filters.role && (
+                <span onClick={() => handleRemoveFilter("role")}>&times;</span>
+              )}
             </div>
 
             <div className="filter">
@@ -177,22 +159,9 @@ const HomePage = () => {
                 <option>201-500</option>
                 <option>500+</option>
               </select>
-            </div>
-            <div className="filter">
-              <select name="experience" onChange={handleFilterChange}>
-                <option>Experience</option>
-                <option>1 Year</option>
-                <option>2 Years</option>
-                <option>3 Years</option>
-
-                <option>4 Years</option>
-                <option>5 Years</option>
-                <option>6 Years</option>
-                <option>7 Years</option>
-                <option>8 Years</option>
-                <option>9 Years</option>
-                <option>10 Years</option>
-              </select>
+              {filters.employees && (
+                <span onClick={() => handleRemoveFilter("employees")}>&times;</span>
+              )}
             </div>
             <div className="filter">
               <select name="remote" onChange={handleFilterChange}>
@@ -200,6 +169,9 @@ const HomePage = () => {
                 <option>Hybrid</option>
                 <option>On-site</option>
               </select>
+              {filters.remote && (
+                <span onClick={() => handleRemoveFilter("remote")}>&times;</span>
+              )}
             </div>
 
             <div className="filter">
@@ -214,6 +186,9 @@ const HomePage = () => {
                 <option>60L</option>
                 <option>70L</option>
               </select>
+              {filters.salary && (
+                <span onClick={() => handleRemoveFilter("salary")}>&times;</span>
+              )}
             </div>
             <div className="filter">
               <input
@@ -247,7 +222,7 @@ const HomePage = () => {
                       <h4>{job.location}</h4>
                       <p>
                         Estimated Salary:{" "}
-                        {job.minJdSalary ? `$${job.minJdSalary}k - ` : ""}$$
+                        {job.minJdSalary ? `$${job.minJdSalary}k - ` : ""}$
                         {job.maxJdSalary}k {job.salaryCurrencyCode}
                       </p>
                     </div>
@@ -259,7 +234,7 @@ const HomePage = () => {
                     </p>
                     <button
                       className="show-more-button"
-                      onClick={() => navigate("/jobDescription")}
+                      onClick={() => navigate("/jobDetails")}
                     >
                       Show More
                     </button>
@@ -267,9 +242,9 @@ const HomePage = () => {
                   <div className="card-footer">
                     <h3>Minimum Experience</h3>
                     <h2>
-                      {job.minExp} - {job.maxExp} years
+                      {job.minExp || 0} - {job.maxExp || 0} years
                     </h2>
-                    <button>Easy Apply</button>
+                    <button ><a href={job.jdLink} target="_blank">Easy Apply </a></button>
                   </div>
                 </div>
               ))
@@ -284,10 +259,10 @@ const HomePage = () => {
 
         <div className="RightSidebar">
           <div className="RightContent">
-            <img src="./Profile.jpg" alt="" />
+            <img src="./Github.jpg" alt="" />
           </div>
           <div className="EditLogo">
-            <span class="material-symbols-outlined">edit</span>
+            <span className="material-symbols-outlined"><svg className="feather-edit" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
             <h3>Edit Profile</h3>
           </div>
         </div>

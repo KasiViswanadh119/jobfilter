@@ -86,27 +86,34 @@
   }
   
   .filter {
+    display: flex;
+    align-items: center;
     background-color: white;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 15px; /* Increase padding for larger size */
     border-radius: 5px;
-    margin-inline: 0.2rem;
+    margin-inline: 0.5rem;
   }
   
   .filter input,
   .filter select {
+    flex: 1;
     border: none;
     outline: none;
-    width: 100%;
-  }
-  
-  .filter input::placeholder,
-  .filter select {
-    font-size: 0.8rem;
-  
     font-family: "Poppins", sans-serif;
+    font-size: 1rem; /* Increase font size for larger size */
     color: gray;
   }
+  
+  .filter input::placeholder {
+    color: gray;
+  }
+  
+  .filter span {
+    margin-left: 10px; /* Increase spacing between input/select and remove symbol */
+    cursor: pointer;
+  }
+  
   
   .grid-container {
     display: grid;

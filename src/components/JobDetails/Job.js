@@ -23,7 +23,7 @@ const Job = () => {
           },
         }}
       >
-        All prodigol jobs
+        Back to Home Page
       </Button>
 
       <div className="job-container">
