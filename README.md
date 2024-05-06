@@ -9,8 +9,8 @@ To get started with the Weekday Project, follow these steps:
 1.Open your terminal or command prompt on your computer.
 
 2.Navigate to the directory where you want to clone the repository. You can do this using the cd command followed by the directory path. For example:
-
 `cd path/to/your/directory`
+
 3.Once you're in the desired directory, use the following command to clone the repository: git clone https://github.com/KasiViswanadh119/jobfilter.git
 
 4.Press Enter. Git will begin cloning the repository to your local machine.
