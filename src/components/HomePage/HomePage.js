@@ -7,7 +7,7 @@ import { setJobFilter } from "../../redux/jobFilterSlice";
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
-  const [showFullText, setShowFullText] = useState(false);
+  const [showFullText, ] = useState(false);
   const navigate = useNavigate(); // Navigate function for routing
   const [filters, setFilters] = useState({
     role: "",
@@ -23,46 +23,16 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchJobs();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line
   }, [loading]);
 
-  useEffect(() => {
-    applyFilters();
-  }, [jobs, filters, companyNameFilter]); // React to filter changes
-
-  const fetchJobs = useCallback(async () => {
-    if (loading) return;
-    setLoading(true);
-
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    const body = JSON.stringify({ limit: 10, offset: offset });
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body,
-    };
-
-    try {
-      const response = await fetch(
-        "https://api.weekday.technology/adhoc/getSampleJdJSON",
-        requestOptions
-      );
-      const data = await response.json();
-      setJobs((prevJobs) => [...prevJobs, ...data.jdList]); // Append new jobs
-      setOffset((prevOffset) => prevOffset + data.jdList.length);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching jobs:", error);
-      setLoading(false);
-    }
-  }, [loading, offset]);
-
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     const filtered = jobs.filter((job) => {
       const roleMatch =
         !filters.role ||
@@ -95,7 +65,41 @@ const HomePage = () => {
       );
     });
     setFilteredJobs(filtered);
-  };
+  } ,[jobs, filters, companyNameFilter]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [jobs, filters, companyNameFilter,applyFilters]); // React to filter changes
+
+  const fetchJobs = useCallback(async () => {
+    if (loading) return;
+    setLoading(true);
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const body = JSON.stringify({ limit: 10, offset: offset });
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body,
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.weekday.technology/adhoc/getSampleJdJSON",
+        requestOptions
+      );
+      const data = await response.json();
+      setJobs((prevJobs) => [...prevJobs, ...data.jdList]); // Append new jobs
+      setOffset((prevOffset) => prevOffset + data.jdList.length);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+      setLoading(false);
+    }
+  }, [loading, offset]);
+
+
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
